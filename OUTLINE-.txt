@@ -1,0 +1,980 @@
+WEB LAB FINALS!
+PART A
+
+1A. Implement a Javascript code to input two numbers using the
+prompt box, and display the sum using an alert.
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sum</title>
+</head>
+<body>
+<h1>Sum</h1>
+Enter num 1 <input type="number" id="num1">
+Enter num 2<input type="number" id="num2">
+<button onclick="calculateSum()">Calculate Sum</button>
+<script>
+function calculateSum() {
+// Get the input values
+var num1 = parseFloat(document.getElementById("num1").value);
+var num2 = parseFloat(document.getElementById("num2").value);
+// Calculate the sum
+var sum = num1 + num2;
+// Display the sum using an alert
+alert("The sum is: " + sum);
+}
+</script>
+</body>
+</html>
+
+1B. Apply JavaScript Arrow function to reverse a given Number. Given
+Number = 12243; Expected Output:34221
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Number Reversal</title>
+</head>
+<body>
+<h1>Number Reversal</h1>
+<label for="number">Enter a number:</label>
+<input type="number" id="number">
+<button onclick="reverseNumber()">Reverse</button>
+<script>
+const reverseNumber = () => {
+// Get the input value
+const number = document.getElementById("number").value;
+// Convert the number to a string and split it into an array of
+characters
+const digits = String(number).split('');
+// Reverse the array of digits and join them back into a string
+const reversedNumber = digits.reverse().join('');
+// Display the reversed number using an alert
+alert("Reversed Number: " + reversedNumber);
+};
+</script>
+</body>
+</html>
+
+OR
+const reverseNumber = num =>
+parseInt(num.toString().split('').reverse().join(''));
+// Example usage
+const givenNumber = 12243;
+const reversedNumber = reverseNumber(givenNumber);
+console.log(reversedNumber); // Output: 34221
+
+
+2A.
+Implement a JavaScript code to handle multiple callback functions using
+JavaScript promises (use
+//promiseobject.then(onfulfilled,onrejected)).
+
+function asyncFunction1() {
+return new Promise((resolve, reject) => {
+setTimeout(() => {
+console.log("Async Function 1 completed");
+resolve();
+}, 1000);
+});
+}
+function asyncFunction2() {
+return new Promise((resolve, reject) => {
+setTimeout(() => {
+console.log("Async Function 2 completed");
+resolve();
+}, 2000);
+});
+}
+function asyncFunction3() {
+return new Promise((resolve, reject) => {
+setTimeout(() => {
+console.log("Async Function 3 completed");
+resolve();
+}, 3000);
+});
+}
+asyncFunction1()
+.then(() => {
+return asyncFunction2();
+})
+.then(() => {
+return asyncFunction3();
+})
+.then(() => {
+console.log("All functions completed");
+})
+.catch((error) => {
+console.log(error);
+});
+
+
+2B. Develop a Javascript program to check whether the number
+entered through the prompt is odd or even.
+
+//2B. // Prompt the user to enter a number
+var number = parseInt(prompt("Enter a number:"));
+// Check if the number is divisible by 2
+if (number % 2 === 0) {
+alert(number + " is an even number.");
+} else {
+alert(number + " is an odd number.");
+}
+
+
+3A. Write a JavaScript function that accepts a string as a parameter
+and counts the number of vowels within the string (using prompt and
+alert)
+
+//3A.
+function countVowels(str) {
+var vowelCount = 0;
+var lowerCaseStr = str.toLowerCase();
+for (var i = 0; i < lowerCaseStr.length; i++) {
+if (lowerCaseStr[i] === 'a' || lowerCaseStr[i] === 'e' ||
+lowerCaseStr[i] === 'i' || lowerCaseStr[i] === 'o' || lowerCaseStr[i] ===
+'u') {
+vowelCount++;
+}
+}
+return vowelCount;
+}
+var inputString = prompt("Enter a string:");
+var result = countVowels(inputString);
+alert("Number of vowels in the string: " + result);
+
+
+3B. Write a JavaScript code that returns a passed string with letters in
+alphabetical order. Use addEventListener() method.
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sort Letters in Alphabetical Order</title>
+</head>
+<body>
+<h1>Sort Letters in Alphabetical Order</h1>
+<label for="input">Enter a string:</label>
+<input type="text" id="input">
+<button id="sortButton">Sort</button>
+<script>
+// Function to sort the letters in a string in alphabetical order
+function sortString() {
+// Get the input value
+var input = document.getElementById("input").value;
+// Split the string into an array of characters, sort them, and join
+them back into a string
+var sortedString = input.split('').sort().join('');
+// Display the sorted string in the console
+alert("Sorted String: " + sortedString);
+}
+// Get the sort button element
+var sortButton = document.getElementById("sortButton");
+// Attach an event listener to the sort button
+sortButton.addEventListener("click", sortString);
+</script>
+</body>
+</html>
+
+
+4. Write a JavaScript code to perform Jump Search for a given key and
+report success or failure. Prompt the user to enter the key and a list
+of numbers
+
+
+// Function to perform Jump Search
+function jumpSearch(arr, x) {
+const n = arr.length;
+let step = Math.floor(Math.sqrt(n));
+let prev = 0;
+while (arr[Math.min(step, n)-1] < x) {
+prev = step;
+step += Math.floor(Math.sqrt(n));
+if (prev >= n)
+return -1;
+}
+while (arr[prev] < x) {
+prev++;
+if (prev == Math.min(step, n))
+return -1;
+}
+if (arr[prev] == x)
+return prev;
+return -1;
+}
+// Prompt user for key and list of numbers
+const key = parseInt(prompt("Enter the key you want to search for:"));
+const numList = prompt("Enter the list of numbers (commaseparated):");
+const numbers = numList.split(',').map(num => parseInt(num));
+// Perform Jump Search and report success or failure
+const index = jumpSearch(numbers, key);
+if (index !== -1) {
+console.log(`Success: ${key} found at index ${index}.`);
+} else {
+console.log(`Failure: ${key} not found in list.`);
+}
+
+
+Or
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Jump Search</title>
+</head>
+<body>
+<h1>Jump Search</h1>
+<label for="keyInput">Enter the key:</label>
+<input type="number" id="keyInput">
+<label for="numbersInput">Enter a list of numbers (commaseparated):</label>
+<input type="text" id="numbersInput">
+<button id="searchButton">Search</button>
+<script>
+// Function to perform Jump Search on a sorted array
+function jumpSearch(arr, key) {
+var n = arr.length;
+var step = Math.floor(Math.sqrt(n));
+var prev = 0;
+// Find the block where the key might be present
+while (arr[Math.min(step, n) - 1] < key) {
+prev = step;
+step += Math.floor(Math.sqrt(n));
+if (prev >= n) {
+return -1; // Key not found
+}
+}
+// Perform linear search within the block
+while (arr[prev] < key) {
+prev++;
+if (prev === Math.min(step, n)) {
+return -1; // Key not found
+}
+}
+// Check if the key is found
+if (arr[prev] === key) {
+return prev; // Key found at index prev
+}
+return -1; // Key not found
+}
+// Function to handle the search button click event
+function performSearch() {
+// Get the input values
+var key = parseInt(document.getElementById("keyInput").value);
+var numbersInput = document.getElementById("numbersInput").value;
+// Convert the comma-separated string to an array of numbers
+var arr = numbersInput.split(',').map(Number);
+// Perform Jump Search on the array
+var result = jumpSearch(arr, key);
+// Display the search result
+if (result === -1) {
+alert("Key not found.");
+} else {
+alert("Key found at index: " + result);
+}
+}
+// Get the search button element
+var searchButton = document.getElementById("searchButton");
+// Attach an event listener to the search button
+searchButton.addEventListener("click", performSearch);
+</script>
+
+
+
+5. ) Implement JavaScript code to encrypt the text using Caesar
+Cipher technique. Display the encrypted text using an alert. Prompt
+the user for input and the shift pattern.
+
+
+// 5. Function to encrypt text using Caesar Cipher technique
+function caesarCipher(text, shift)
+{
+let result = "";
+for (let i = 0; i < text.length; i++)
+{
+let char = text[i];
+if (char.match(/[a-z]/i))
+{
+let code = text.charCodeAt(i);
+if (code >= 65 && code <= 90)
+{
+char = String.fromCharCode(((code - 65 + shift) % 26)
++ 65);
+}
+else if (code >= 97 && code <= 122)
+{
+char = String.fromCharCode(((code - 97 + shift) % 26)
++ 97);
+}
+}
+result += char;
+}
+return result;
+}
+// Prompt user for input and shift pattern
+const text = prompt("Enter the text to be encrypted:");
+const shift = parseInt(prompt("Enter the shift pattern (a
+positiveinteger):"));
+// Encrypt the text using Caesar Cipher and display the result
+const encryptedText = caesarCipher(text, shift);
+console.log(`Encrypted text: ${encryptedText}`);
+
+
+
+6.a.)Implement a JavaScript Program to capitalize the first letter of
+each word in a string
+
+
+function capitalizeString(str) {
+let words = str.split(" ");
+for (let i = 0; i < words.length; i++) {
+words[i] = words[i][0].toUpperCase() + words[i].substr(1);
+}
+return words.join(" ");
+}
+//const caps = capitalizeString("hello there");
+//console.log(`Capitalised string is : ${caps}`);
+ // or
+const caps = prompt("enter the string :");
+const caps2 = capitalizeString(caps);
+alert("capitalised string is : "+ caps2);
+
+
+
+6b)Develop a Javascript program to demonstrate the following
+events - a) onClick b) onMouseOver
+c)onMouseOut d) onChange e) onKeyDown
+
+
+a.) onClick
+!doctype html>
+<html>
+<head>
+<script>
+function hiThere() {
+alert('Hi there!');
+}
+</script>
+</head>
+<body>
+<button type="button" onclick="hiThere()">Click me event</button>
+</body>
+</html>
+
+
+b.) onMouseOver
+<!doctype html>
+<html>
+<head>
+<script>
+function hov() {
+let e = document.getElementById("hover");
+e.style.display='none'
+}
+</script>
+</head>
+<body>
+<div id="hover" onmouseover="hov()"
+style="background-color:green;height:200px;width:200px;">
+</div>
+</body>
+</html>
+
+
+c.)onmouseout
+<!doctype html>
+<html>
+<head>
+<script>
+function out() {
+var e = document.getElementById('hover');
+e.style.display = 'none';
+}
+</script>
+</head>
+<body>
+<div id="hover" onmouseout="out()"
+style="background-color:green;height:200px;width:200px;">
+</div>
+</body>
+</html>
+
+
+
+d.)onchange
+<!doctype html>
+<html>
+<head></head>
+<body>
+<h1>ON CHANGE</h1>>
+<input onchange="alert(this.value)" type="number">
+</body>
+</html>
+
+
+
+e.) onKeyDown
+<!DOCTYPE html>
+<html>
+<body>
+<input type="text" id="demo" onkeydown="myFunction()">
+<script>
+function myFunction() {
+document.getElementById("demo").style.backgroundColor = "blue";
+}
+</script>
+</body>
+</html
+
+
+
+7. Implement a JavaScript program to insert elements to an array
+using the prompt and perform binary search on the array to search
+for the given element.
+//7.BINARY SEARCH
+function insertElements() {
+var arr = [];
+var numElements = parseInt(prompt("Enter the number of elements to insert:"));
+for (var i = 0; i < numElements; i++) {
+var element = parseInt(prompt("Enter element " + (i + 1) + ":"));
+arr.push(element);
+}
+return arr;
+}
+// Function to perform binary search on a sorted array
+function binarySearch(arr, key) {
+var start = 0;
+var end = arr.length - 1;
+while (start <= end) {
+var mid = Math.floor((start + end) / 2);
+if (arr[mid] === key) {
+return mid; // Key found at index mid
+} else if (arr[mid] < key) {
+start = mid + 1;
+} else {
+end = mid - 1;
+}
+}
+return -1; // Key not found
+}
+// Insert elements into the array
+var array = insertElements();
+// Prompt the user to enter the key to search
+var key = parseInt(prompt("Enter the key to search:"));
+// Sort the array in ascending order
+array.sort(function(a, b) {
+return a - b;
+});
+// Perform binary search on the array
+var result = binarySearch(array, key);
+// Display the search result
+if (result === -1) {
+alert("Key not found.");
+} else {
+alert("Key found at index: " + result);
+}
+
+
+
+
+8a.) Develop a Javascript code to split a string and convert it into an
+array of words.
+//8a.
+function splitString(str) {
+return str.split(" ");
+}
+let str = "the quick brown fox jumps over the lazy dog";
+let words = splitString(str);
+console.log(words); // Output: ["the", "quick", "brown", "fox", "jumps",
+//"over", "the", "lazy", "dog"]
+
+
+
+8.b) Implement a Javascript program to validate the VTU USN
+entered in the text box and alert as valid or invalid USN.
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>VTU USN Validation</title>
+</head>
+<body>
+<h1>VTU USN Validation</h1>
+<label for="usnInput">Enter VTU USN:</label>
+<input type="text" id="usnInput">
+<button onclick="validateUSN()">Validate</button>
+<script>
+// Function to validate VTU USN
+function validateUSN() {
+var usn = document.getElementById("usnInput").value;
+var pattern = /^1[A-Z a-z]{2}[0-9]{2}[A-Z a-z]{2}[0-9]{3}$/;
+if (pattern.test(usn)) {
+alert("Valid USN");
+} else {
+alert("Invalid USN");
+}
+}
+</script>
+</body>
+</html>
+
+
+
+9a.) Build a JavaScript code to find the leap years in a given range of
+years
+
+
+/9a.LEAP YEARS
+function findLeapYears(startYear, endYear) {
+var leapYears = [];
+for (var year = startYear; year <= endYear; year++) {
+if (year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0)) {
+leapYears.push(year);
+}
+}
+return leapYears;
+}
+// Prompt the user to enter the range of years
+var startYear = parseInt(prompt("Enter the start year:"));
+var endYear = parseInt(prompt("Enter the end year:"));
+// Find the leap years in the given range
+var leapYearsInRange = findLeapYears(startYear, endYear);
+// Display the leap years
+if (leapYearsInRange.length === 0) {
+alert("No leap years found in the given range.");
+} else {
+alert("Leap years in the range " + startYear + " to " + endYear + ": "+
+leapYearsInRange);
+}
+
+
+
+
+9B.) Implement a program to store values into a set, and to retrieve
+value from the set, to iterate over the set.
+
+//9B.
+// Create a new Set
+var mySet = new Set();
+// Add values to the Set
+mySet.add(10);
+mySet.add("Hello");
+mySet.add(true);
+mySet.add(10); // Adding duplicate value, which will be ignored
+// Retrieve value from the Set
+var value = "Hello";
+if (mySet.has(value)) {
+console.log(value + " is present in the Set.");
+} else {
+console.log(value + " is not present in the Set.");
+}
+// Iterate over the Set
+console.log("Values in the Set:");
+mySet.forEach(function(item) {
+console.log(item);
+});
+mySet.delete("Hello");
+console.log(mySet.size); // 2
+mySet.clear();
+console.log(mySet.size); // 0
+
+
+
+
+10A.) Write a JavaScript program to search a date within a string and
+display(alert) the date. Sample
+Input: "Albert Einstein was born in Ulm, on 14/03/1879."
+
+//10A.FINDING DATE IN A STRING !!
+function searchAndDisplayDate(str) {
+var dateRegex = /\d{2}\/\d{2}\/\d{4}/; //20 --> \d{2}\ and 2002 --> \d{4}\
+var match = str.match(dateRegex);
+if (match) {
+alert("Date found: " + match[0]);
+} else {
+alert("No date found in the string.");
+}
+}
+// Prompt the user to enter a string
+var inputString = prompt("Enter a string:");
+// Search and display the date within the string
+searchAndDisplayDate(inputString);
+
+
+
+10B.) Implement a program to store values into a map, and to
+retrieve value from the map using key, to iterate over the map.
+
+
+//10.B. MAP BASICS
+var myMap = new Map();
+// Add values to the Map
+myMap.set("name", "John");
+myMap.set("age", 30);
+myMap.set("city", "London");
+// Retrieve value from the Map using key
+var key = "age";
+if (myMap.has(key)) {
+var value = myMap.get(key);
+console.log("Value for key '" + key + "':"+ value);
+} else {
+console.log("Key '" + key + "' not found in the Map.");
+}
+// Iterate over the Map
+console.log("Entries in the Map:");
+myMap.forEach(function(value, key) {
+console.log(key + ":"+value);
+});
+myMap.delete("city");
+console.log(myMap.size); // 2
+
+
+
+
+
+PART B
+
+1.)Show how map is different from object to store key value pairs
+with coding example and prove Maps perform better than objects in
+most of the scenarios involving addition and removal of keys.
+
+
+//1. MAP VS OBJECT
+console.time('Map Performance');
+const map = new Map();
+for (let i = 0; i < 100000; i++) {
+map.set('key' + i, i);
+}
+for (let i = 0; i < 100000; i++) {
+map.delete('key' + i);
+}
+for (let i = 0; i < 100000; i++) {
+map.get('key' + i);
+}
+console.timeEnd('Map Performance');
+// Object performance test
+console.time('Object Performance');
+const obj = {};
+for (let i = 0; i < 100000; i++) {
+obj['key' + i] = i;
+}
+for (let i = 0; i < 100000; i++) {
+delete obj['key' + i];
+}
+for (let i = 0; i < 100000; i++) {
+obj['key'+i];
+}
+console.timeEnd('Object Performance');
+
+
+2. Show how set is different from array to store the value with coding
+example and prove Sets perform better than Arrays in most of the
+scenarios involving searching values present in it.
+
+
+// 2. SET VS ARRAY
+// Set performance test
+console.time('Set Performance');
+const set = new Set();
+for (let i = 0; i < 100000; i++) {
+set.add(i);
+}
+for (let i = 0; i < 100000; i++) {
+set.has(i);
+}
+console.timeEnd('Set Performance');
+// Array performance test
+console.time('Array Performance');
+const array = [];
+for (let i = 0; i < 100000; i++) {
+if (!array.includes(i)) {
+array.push(i);
+}
+}
+for (let i = 0; i < 100000; i++) {
+array.includes(i);
+}
+console.timeEnd('Array Performance');
+
+
+
+3. Implement a JavaScript promise to perform arithmetic operations.
+Display result for each operation synchronously using await ()
+method. (Give delay in each promise object using settimeout()
+method).
+
+
+
+//3. ARITHEMETIC OPERATIONS USING AWAIT METHOD !
+function add(a, b) {
+return new Promise((resolve, reject) => {
+setTimeout(() => {
+resolve(a + b);
+}, 2000);
+});
+}
+function subtract(a, b) {
+return new Promise((resolve, reject) => {
+setTimeout(() => {
+resolve(a - b);
+}, 3000);
+});
+}
+function multiply(a, b) {
+return new Promise((resolve, reject) => {
+setTimeout(() => {
+resolve(a * b);
+}, 4000);
+});
+}
+async function performOperations() {
+let additionResult = await add(3, 4);
+console.log("Addition Result:", additionResult);
+let subtractionResult = await subtract(additionResult, 2);
+console.log("Subtraction Result:", subtractionResult);
+let multiplicationResult = await multiply(subtractionResult, 5);
+console.log("Multiplication Result:", multiplicationResult);
+}
+performOperations()
+.catch((error) => {
+console.log(error);
+});
+//output:
+//Addition Result: 7
+//Subtraction Result: 5
+// Multiplication Result: 25
+
+
+
+
+4. Develop a Javascript program where user passes the location and a
+function is called which returns a
+promise, if the location passed is Paris Below is the output expected:
+"Let's take a trip to Paris"
+If the location is other than Paris, show the error message "Invalid
+Location" 
+
+
+
+//4. PARIS PROMISE !
+function tripToParis(location) {
+return new Promise((resolve, reject) => {
+if (location === 'Paris') {
+resolve("Let's take a trip to Paris");
+} else {
+reject('Invalid Location');
+}
+});
+}
+const userLocation = prompt('Enter a location:');
+tripToParis(userLocation)
+.then((message) => {
+alert(message);
+})
+.catch((error) => {
+alert(error);
+});
+
+
+
+5. Implement a JavaScript program to book a hotel only after booking
+a flight.
+[Hint: To achieve this, the promise returned from the bookHotel
+function is resolved only after resolving the promise from bookFlight
+function. If the promise gets rejected from bookflight then it won't
+execute the second function.]
+
+
+
+//5. BOOK A FLIGTH THEN A HOTEL USING PROMISE !!
+function bookFlight(flightDetails) {
+return new Promise((resolve, reject) => {
+// Simulating booking a flight by waiting for 2 seconds
+setTimeout(() => {
+console.log("Flight booked successfully!");
+resolve(flightDetails);
+}, 2000);
+});
+}
+function bookHotel(hotelDetails) {
+return new Promise((resolve, reject) => {
+// Simulating booking a hotel by waiting for 2 seconds
+setTimeout(() => {
+console.log("Hotel booked successfully!");
+resolve(hotelDetails);
+}, 2000);
+});
+}
+bookFlight({flightNumber: "ABC123", from: "New York", to: "London"})
+.then((flightDetails) => {
+console.log("Flight details:", flightDetails);
+return bookHotel({hotelName: "Marriott", location: "London"});
+})
+.then((hotelDetails) => {
+console.log("Hotel details:", hotelDetails);
+})
+.catch((error) => {
+console.log(error);
+});
+//output
+//Flight booked successfully!
+//Flight details: { flightNumber: 'ABC123', from: 'New York', to: 'London' }
+//Hotel booked successfully!
+//Hotel details: { hotelName: 'Marriott', location: 'London' }
+
+
+
+6. Implement an arrow function that will take one parameter weight
+in Kg. This arrow function will convert Kg
+to Lbs. Formula is kg*2.2
+● If LBS is > 150, then the function should return "obese"
+● If LBS is between 100 to 150, the function should return "you are
+ok"
+● If LBS is < 100, then the function should return "underweight"
+
+
+
+// 6.WEIGHT ARROW FUNCTION !
+const convertWeight = (weight) => {
+const lbs = weight * 2.2;
+if (lbs > 150) {
+return 'obese';
+} else if (lbs >= 100 && lbs <= 150) {
+return 'you are ok';
+} else {
+return 'underweight';
+}
+};
+const weightInKg = parseFloat(prompt('Enter weight in kilograms (kg):'));
+const result = convertWeight(weightInKg);
+alert(result);
+
+
+
+
+7. 
+//7. INFECTION DETECTION
+function identifyInfection(virusComposition, bloodComposition)
+{
+let virusIndex = 0;
+let bloodIndex = 0;
+while (virusIndex < virusComposition.length && bloodIndex < bloodComposition.length)
+{
+if (virusComposition[virusIndex] === bloodComposition[bloodIndex])
+{
+bloodIndex++;
+}
+virusIndex++;
+}
+if (bloodIndex === bloodComposition.length) {
+return 'POSITIVE';
+}
+else
+{
+return 'NEGATIVE';
+}
+}
+const virusComposition = prompt('Enter the virus composition:').toLowerCase();
+const bloodComposition = prompt('Enter the blood composition:').toLowerCase();
+const result = identifyInfection(virusComposition, bloodComposition);
+alert(result);
+
+
+
+
+8. EMAIL VALIDATION
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<title> Validation</title>
+</head>
+<body>
+<h1> Validation</h1>
+<label for="emailInput">Enter email address:</label>
+<input type="text" id="emailInput">
+<button onclick="validate()">Validate</button>
+<script>
+function validate() {
+var em = document.getElementById("emailInput").value;
+var pattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+if (pattern.test(em)) {
+alert("Valid email");
+} else {
+alert("Invalid email");
+}
+}
+</script>
+</body>
+</html>
+
+
+
+9. Implement a JavaScript program using Client-side web APIs to Get
+the latitude and longitude of the user's position.
+
+
+//9. GEO LOCATION FINDER !!
+if (navigator.geolocation) {
+// Get the current position
+navigator.geolocation.getCurrentPosition(
+(position) => {
+// Extract the latitude and longitude from the position object
+const latitude = position.coords.latitude;
+const longitude = position.coords.longitude;
+// Display the latitude and longitude
+alert("Latitude: " + latitude);
+alert("Longitude: " + longitude);
+},
+(error) => {
+alert("Error occurred while retrieving the position: " + error.message);
+}
+);
+} else {
+alert("Geolocation is not supported by your browser");
+}
+
+
+
+
+10. Develop a JavaScript program to count the number of visitors to
+keep track of how often a website is accessed and display the
+number of visitors at the bottom of the homepage.
+
+
+
+<!DOCTYPE html>
+<html>
+<body>
+<button id="my-button">Click Me</button>
+<div id="count">Button clicked: 0 times</div>
+<script>
+// Get the reference to the button element
+let button = document.getElementById("my-button");
+// Initialize the click count to 0
+let clickCount = 0;
+// Get the reference to the div element where the count will be displayed
+let display = document.getElementById("count");
+// Check if the clickCount exists in localStorage
+if (localStorage.getItem("clickCount")) {
+// If it exists, parse the stored value to an integer and assign it to clickCount
+clickCount = parseInt(localStorage.getItem("clickCount"));
+}
+// Add a click event listener to the button
+button.addEventListener("click", sample);
+// Define the event handler function
+function sample() {
+// Increment the clickCount by 1
+clickCount++;
+// Update the text content of the display div to show the updated count
+display.innerHTML = "Button clicked: " + clickCount + " times";
+// Store the updated clickCount in the localStorage
+localStorage.setItem("clickCount", clickCount);
+}
+</script>
+</body>
+</html>
